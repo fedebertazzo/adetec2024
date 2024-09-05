@@ -32,6 +32,13 @@ class Garage:
                 tabla.add_row([pos,self.garage_dic[pos].id,self.garage_dic[pos].marca,self.garage_dic[pos].modelo,self.garage_dic[pos].color])
         print(tabla)
 
+
+        lista_valores_auto=[]
+        for obj_auto in self.garage_lista:
+            lista_valores_auto.append([obj_auto.id,",", obj_auto.marca,"," ,obj_auto.modelo,",", obj_auto.color])
+        # print(lista_valores_auto)
+        return lista_valores_auto
+
     def eliminar_auto(self):
         '''Elimina un auto del garage'''
         self.mostrar_autos()
