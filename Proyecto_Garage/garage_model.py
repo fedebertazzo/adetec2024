@@ -31,25 +31,22 @@ class Garage:
             else:
                 tabla.add_row([pos,self.garage_dic[pos].id,self.garage_dic[pos].marca,self.garage_dic[pos].modelo,self.garage_dic[pos].color])
         print(tabla)
+        nueva_lista=[]
+        for pos in self.garage_dic:
+            if self.garage_dic.get(pos)== False:
+                nueva_lista.append([pos,"<Libre>"])
+            else:
+                nueva_lista.append([pos,self.garage_dic[pos].id,self.garage_dic[pos].marca,self.garage_dic[pos].modelo,self.garage_dic[pos].color])
+        return nueva_lista
 
-
-        lista_valores_auto=[]
-        for obj_auto in self.garage_lista:
-            lista_valores_auto.append([obj_auto.id,",", obj_auto.marca,"," ,obj_auto.modelo,",", obj_auto.color])
-        # print(lista_valores_auto)
-        return lista_valores_auto
-
-    def eliminar_auto(self):
+    def eliminar_auto(self, pos):
         '''Elimina un auto del garage'''
-        self.mostrar_autos()
-        pos=input("Ingrese la ubicación del auto a eliminar: ")
         try:
             if pos in self.garage_dic:
                 if self.garage_dic[pos]==False:
                     print("Aqui no hay ningun auto!")
                 else:
-                    self.garage_dic[str(pos)]=False
-                    self.mostrar_autos()
+                    self.garage_dic[pos]=False
             else:
                 print("La ubicación no existe!")
         except:
@@ -65,3 +62,11 @@ class Garage:
         else:
             print("No se pudo agregar auto, la ubicación esta ocupada.")
             raise ValueError
+        
+    def mostrar_libres(self):
+        lista_libres=[]
+        for pos in self.garage_dic:
+            if self.garage_dic[pos] == False:
+                lista_libres.append(str(pos))
+        print(lista_libres)
+        return lista_libres
