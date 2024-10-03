@@ -31,6 +31,7 @@ class Garage:
             else:
                 tabla.add_row([pos,self.garage_dic[pos].id,self.garage_dic[pos].marca,self.garage_dic[pos].modelo,self.garage_dic[pos].color])
         print(tabla)
+        
         nueva_lista=[]
         for pos in self.garage_dic:
             if self.garage_dic.get(pos)== False:

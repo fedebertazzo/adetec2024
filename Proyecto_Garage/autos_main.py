@@ -1,20 +1,48 @@
 from autos_model import Auto
-from autos_data import lista_autos
+# from autos_data import lista_autos
 from garage_model import Garage
 import gui
 
-lista_garage=[]
-#Armar la lista según el diccionario en autos_data.py
-for auto in lista_autos:
-    auto_dominio = auto["dominio"]
-    auto_marca = auto["marca"]
-    auto_modelo = auto["modelo"]
-    auto_color = auto["color"]
-    nuevo_auto = Auto(auto_dominio,auto_marca,auto_modelo,auto_color)
-    lista_garage.append(nuevo_auto)
+# lista_garage=[]
+# #Armar la lista según el diccionario en autos_data.py
+# for auto in lista_autos:
+#     auto_dominio = auto["dominio"]
+#     auto_marca = auto["marca"]
+#     auto_modelo = auto["modelo"]
+#     auto_color = auto["color"]
+#     nuevo_auto = Auto(auto_dominio,auto_marca,auto_modelo,auto_color)
+#     lista_garage.append(nuevo_auto)
+
+#Tomar el archivo autos_data.txt y armar la variable lista_garage.
+#"lista_garage" es una lsita de objetos Auto
+nombre_archivo="demo.txt"
+
+def leer_txt(nombre_archivo):
+    lista_autos=[]
+    with open(nombre_archivo,"r", encoding="utf-8") as txt:
+        contenido=txt.readlines()
+        # print(contenido)
+        contenido_limpio=[]
+        for elemento in contenido:
+            contenido_limpio.append(elemento.strip())  
+        # print(contenido_limpio)
+        for linea in contenido_limpio:
+            aux=linea.split(",")
+        #    print(aux)
+        if aux[0] != "LIBRE":
+            dominio=aux[0]
+            marca=aux[1]
+            modelo=aux[2]
+            color=aux[3]
+            lista_autos.append(Auto(dominio,marca,modelo,color))
+        else:
+            lista_autos.append(False)
+
+    print(lista_autos)
+    return lista_autos
 
 #Crea el objeto garage
-garage = Garage(lista_garage)
+garage = Garage(leer_txt(nombre_archivo))
 garage_gui = gui.GarageUI(garage)
 
 #Parámetro de salida del menú
